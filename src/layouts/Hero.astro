@@ -1,0 +1,12 @@
+---
+import Layout from "./Base.astro";
+import type { WithContent } from "../utils/cms.ts";
+
+const { content, ...page } = Astro.props as WithContent<CMS.LegalPage>;
+
+const { blocks = [], hero } = page;
+---
+
+<Layout {...page}>
+	<slot />
+</Layout>

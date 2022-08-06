@@ -1,16 +1,25 @@
 ---
-import Image from 'components/elements/Image.astro'
-	
 interface Props {
   src: string
-  alt: string
-  small: boolean
+  alt?: string
+  small?: boolean
 }
 
-const { src = '/img/avatar.svg', alt = '', small = false } = Astro.props as Props
+const {
+  src = '/img/avatar.svg',
+  alt = '',
+  small = false,
+} = Astro.props as Props
 ---
 
-<Image width="48" height="48" src={src} alt={alt} class={`u-photo${small ? ' small' : ''}`} />
+<img
+  {src}
+  width="48"
+  height="48"
+  {alt}
+  loading="lazy"
+  class={`u-photo${small ? ' small' : ''}`}
+/>
 
 <style lang="scss">
   img {

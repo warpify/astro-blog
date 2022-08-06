@@ -1,35 +1,40 @@
 ---
-import { FooterSimple } from "../index.js";
-import routes from "../data/routes.json";
+import { WithContent } from "../utils/seo.ts";
 
-interface Props {
-	pathname?: string;
-}
-
-const { pathname } = Astro.props as props;
+const { content, ...page } = Astro.props as WithContent<CMS.Page>;
 ---
 
-<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href={Astro.resolve("../style/main.scss")} />
-	</head>
-
+	<head> </head>
 	<body>
-
 		<main id="main">
 			<slot />
 		</main>
-
-		<FooterSimple />
-		
 	</body>
 </html>
 
-<style lang="scss">
+<style>
+	body {
+		font-family: Poppins, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+			"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		font-size: var(--text-base);
+		line-height: 1.75;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		background: #f3f3f3;
+	}
+
 	main {
 		flex: 1 0 0;
+	}
+
+	a[href="#main"].sr-only.sr-only-focusable {
+		top: var(--spacer-xs);
+		left: var(--spacer-xs);
+		background: var(--chisel-neutral-900);
+		color: var(--chisel-neutral-50);
+		padding: var(--spacer-xs);
+		z-index: 1;
 	}
 </style>

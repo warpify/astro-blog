@@ -1,0 +1,5 @@
+.container {
+	width: var(--container-widht, 90vw);
+	max-width: var(--container-max-width, 90rem);
+	margin: 0 auto;
+}

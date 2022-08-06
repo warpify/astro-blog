@@ -1,14 +1,14 @@
 ---
-import Avatar from 'components/image/Avatar.astro'
-import WebMentionReply from 'components/social/WebMentionReply.astro'
-import { isMentionType, MENTION_TYPE } from 'utils/mentions.js'
-import site from 'data/site.json'
+import Avatar from './Avatar.astro'
+import WebMentionReply from './WebMentionReply.astro'
+import { isMentionType, MENTION_TYPE } from '../utils/mentions.js'
+import site from '../data/site.json'
 
 interface WebMention {
   author?: {
     photo: string
     name: string
-  };
+  }
   url?: string
   published: Date
   content: {
@@ -21,10 +21,12 @@ interface Props {
   url: string
 }
 
-const { webMentions, url } = Astro.props as props
+const { webMentions, url } = Astro.props as Props
 const reposts = webMentions.filter(isMentionType(MENTION_TYPE.Share))
 const likes = webMentions.filter(isMentionType(MENTION_TYPE.Like))
 const replies = webMentions.filter(isMentionType(MENTION_TYPE.Reply))
+
+const domain = new URL(site.url).hostname
 ---
 
 <h2 class="h3">Webmentions</h2>
@@ -33,29 +35,47 @@ const replies = webMentions.filter(isMentionType(MENTION_TYPE.Reply))
 
 {likes.length > 0 && (
   <div class="facepile">
-    <h3 class="h4">{likes.length} Like{likes.length > 1 ? "s" : ""}</h3>
+    <h3 class="h4">
+      {likes.length} Like{likes.length > 1 ? 's' : ''}
+    </h3>
 
-    {likes.map((mention) => mention.url ? (
-        <a class="h-card u-url" href={mention.url} target="_blank" rel="noopener noreferrer">
+    {likes.map((mention) =>
+      mention.url ? (
+        <a
+          class="h-card u-url"
+          href={mention.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Avatar src={mention.author.photo} alt={mention.author.name} />
         </a>
-    ) : (
+      ) : (
         <Avatar src={mention.author.photo} alt={mention.author.name} />
-    ))}
+      )
+    )}
   </div>
 )}
 
 {reposts.length > 0 && (
   <div class="facepile">
-    <h3 class="h4">{reposts.length} Repost{reposts.length > 1 ? "s" : ""}</h3>
+    <h3 class="h4">
+      {reposts.length} Repost{reposts.length > 1 ? 's' : ''}
+    </h3>
 
-    {reposts.map((mention) => mention.url ? (
-        <a class="h-card u-url" href={mention.url} target="_blank" rel="noopener noreferrer">
+    {reposts.map((mention) =>
+      mention.url ? (
+        <a
+          class="h-card u-url"
+          href={mention.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Avatar src={mention.author.photo} alt={mention.author.name} />
         </a>
-    ) : (
+      ) : (
         <Avatar src={mention.author.photo} alt={mention.author.name} />
-    ))}
+      )
+    )}
   </div>
 )}
 
@@ -63,26 +83,26 @@ const replies = webMentions.filter(isMentionType(MENTION_TYPE.Reply))
   <div>
     <h3 class="h4">
       {replies.length}
-      {replies.length === 1 ? "Reply" : "Replies"}
+      {replies.length === 1 ? 'Reply' : 'Replies'}
     </h3>
 
     {replies.map((mention) => (
-        <WebMentionReply mention={mention} />
+      <WebMentionReply mention={mention} />
     ))}
   </div>
 )}
 
-
 <div class="webmentions__form">
   <p class="h5">
-    {webMentions.length > 0 ? "These are " : "We support "} <a href="https://indieweb.org/Webmention">webmentions</a> via the
+    {webMentions.length > 0 ? 'These are ' : 'We support '}
+    <a href="https://indieweb.org/Webmention">webmentions</a> via the
     <a href="https://indieweb.org/">IndieWeb</a>
     and
     <a href="https://webmention.io/">webmention.io</a>. Mention this post from
     your site:
   </p>
   <form
-    action="https://webmention.io/{site.domain}/webmention"
+    action={`https://webmention.io/${domain}/webmention`}
     method="post"
     class="form-webmention"
   >
@@ -106,7 +126,7 @@ const replies = webMentions.filter(isMentionType(MENTION_TYPE.Reply))
 
   h3 {
     width: 100%;
-    color: var(--color-secondary);
+    color: var(--chisel-secondary);
     font-weight: 500;
     margin: var(--spacer-md) 0 var(--spacer-xs);
   }
@@ -122,7 +142,7 @@ const replies = webMentions.filter(isMentionType(MENTION_TYPE.Reply))
       text-decoration: none;
 
       &:hover :global(img) {
-        filter: var(--shadow-md);
+        filter: var(--shadow-secondary);
       }
     }
   }
@@ -131,7 +151,7 @@ const replies = webMentions.filter(isMentionType(MENTION_TYPE.Reply))
     margin-top: var(--spacer-lg);
   }
 
-  button[type=submit] {
+  button[type='submit'] {
     margin-top: var(--spacer-sm);
   }
 </style>

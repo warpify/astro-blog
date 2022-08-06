@@ -1,0 +1,58 @@
+{
+  "pages": [
+    {
+      "title": "Home",
+      "page": "src/data/pages/home.md",
+      "id": ""
+    },
+    {
+      "title": "Services",
+      "page": "src/data/pages/home.md",
+      "id": "services"
+    },
+    {
+      "title": "Blog",
+      "page": "src/data/pages/blog.md",
+      "id": ""
+    }
+  ],
+  "legal": [
+    {
+      "title": "Privacy Policy",
+      "page": "src/data/pages/privacy-policy.md",
+      "id": ""
+    },
+    {
+      "title": "Terms & Conditions",
+      "page": "src/data/pages/terms-conditions.md",
+      "id": ""
+    }
+  ],
+  "contact": [
+    {
+      "title": "Email us at info@navillus.nl",
+      "url": "mailto:info@navillus.nl",
+      "icon": "email"
+    },
+    {
+      "title": "Find us on Twitter",
+      "url": "https://twitter.com/navillus_dev",
+      "icon": "twitter"
+    },
+    {
+      "title": "Find us on dev.to",
+      "url": "https://dev.to/navillus_dev",
+      "icon": "devto"
+    },
+    {
+      "title": "Find us on Github",
+      "url": "https://github.com/navillus-bv",
+      "icon": "github"
+    },
+    {
+      "title": "RSS Feed",
+      "url": "https://navillus.dev/feed/blog.xml",
+      "icon": "rss"
+    }
+  ]
+}

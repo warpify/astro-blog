@@ -1,0 +1,150 @@
+---
+import DateTime from "./components/Date.astro";
+import Author from "./components/Author.astro";
+import { smartypants } from "smartypants";
+
+const { post = {}, variant = "summary" } = Astro.props;
+const Title = variant === "summary" ? "h2" : "h1";
+---
+
+<li class="post">
+	<a class="overlay" href={post.href}></a>
+	<div class="wrapper">
+		<Title class="title text-gradient">{smartypants(post.title, 1)}</Title>
+
+		<div class="authors">
+			<h3>Written by</h3>
+			<ul role="list">
+				{post.authors.map((author) => (
+					<li>
+						<Author name={author} />
+					</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="date">
+			<h3>Published on</h3>
+			<p><DateTime value={post.publishDate} /></p>
+		</div>
+	</div>
+</li>
+
+<style lang="scss">
+	.post {
+		--color-midnight: #31274a;
+		--color-midnight-rgb: 49, 39, 74;
+		--shadow-sm: 0px 19px 53px 0px rgba(var(--color-midnight-rgb), 0.03), 0px 10px 28px 0px rgba(var(--color-midnight-rgb), 0.05),
+			0px 6px 16px 0px rgba(var(--color-midnight-rgb), 0.05), 0px 3px 9px 0px rgba(var(--color-midnight-rgb), 0.075),
+			0px 1px 4px 0px rgba(var(--color-midnight-rgb), 0.1);
+		--shadow-md: 0px 2px 2px 0px rgba(var(--color-midnight-rgb), 0.04), 0px 6px 5px 0px rgba(var(--color-midnight-rgb), 0.06),
+			0px 15px 14px 0px rgba(var(--color-midnight-rgb), 0.08), 0px 50px 46px 0px rgba(var(--color-midnight-rgb), 0.12);
+		--shadow-xl: 0px 3px 2px 0px rgba(var(--color-midnight-rgb), 0.02), 0px 6px 5px 0px rgba(var(--color-midnight-rgb), 0.03),
+			0px 12px 10px 0px rgba(var(--color-midnight-rgb), 0.04), 0px 22px 18px 0px rgba(var(--color-midnight-rgb), 0.04),
+			0px 42px 34px 0px rgba(var(--color-midnight-rgb), 0.05), 0px 100px 80px 0px rgba(var(--color-midnight-rgb), 0.07);
+
+		flex: 1 0 25%;
+		position: relative;
+		display: flex;
+		flex-flow: row wrap;
+		padding: 3rem 2rem;
+		background: white;
+		box-shadow: var(--shadow-md);
+		border-radius: 12px;
+		font-size: clamp(1.09rem, 1rem + 0.47vw, 1.33rem);
+		line-height: 1.3;
+		color: var(--color-midnight);
+	}
+	:is(.post:hover, .post:focus-within) .title {
+		--fill: var(--gradient-pop-1);
+	}
+	.post :global(a) {
+		z-index: 1;
+	}
+	.overlay {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: block;
+		z-index: 0;
+	}
+	.wrapper {
+		width: 100%;
+		max-width: 48rem;
+		margin: 0 auto;
+		display: flex;
+		flex-flow: row wrap;
+		--space: 0.5rem;
+	}
+	@media (min-width: 40rem) {
+		.wrapper {
+			--space: 1rem;
+		}
+	}
+	.title {
+		font-family: var(--font-display);
+		margin: 0 auto;
+		flex-grow: 1;
+		width: 100%;
+		line-height: 1.1;
+	}
+	h1.title {
+		font-size: var(--size-800);
+	}
+	h2.title {
+		--fill: var(--color-dusk);
+		font-size: var(--size-600);
+	}
+	.description {
+		flex-grow: 1;
+		width: 100%;
+		margin-top: var(--space);
+	}
+	.description > p {
+		max-width: 48ch;
+	}
+	.authors {
+		flex-grow: 2;
+		width: 100%;
+	}
+	@media (min-width: 52rem) {
+		.authors {
+			width: initial;
+		}
+	}
+	.authors ul {
+		display: flex;
+		flex-flow: column nowrap;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.authors ul > li + li {
+		margin-top: 0.5rem;
+	}
+	.date {
+		flex-grow: 1;
+	}
+	h3 {
+		margin: 0;
+		margin-bottom: var(--size-300);
+		font-family: var(--font-display);
+		font-size: var(--size-300);
+		font-weight: 700;
+		color: var(--color-dusk);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+	.date,
+	.authors {
+		margin-top: calc(var(--space) * 2);
+		font-size: var(--size-400);
+	}
+	:is(.date, .authors) p {
+		margin: 0;
+		font-size: inherit;
+		height: 2rem;
+	}
+</style>
