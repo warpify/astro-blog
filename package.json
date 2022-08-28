@@ -1,6 +1,6 @@
 {
 	"name": "astro-blog",
-	"version": "0.0.1",
+	"version": "0.0.7",
 	"description": "Collection of utils for blogging with astro",
 	"homepage": "https://github.com/warpsio/astro-blog",
 	"bugs": {
@@ -29,7 +29,7 @@
 		"release": "standard-version"
 	},
 	"devDependencies": {
-		"astro": "^0.26.1",
+		"astro": "^1.1.1",
 		"astro-fonts": "^0.2.6",
 		"astro-xelement": "^3.2.0",
 		"chisel.css": "^0.8.1",
@@ -39,12 +39,12 @@
 		"nano-markdown": "^1.2.1",
 		"netlify-plugin-cache-folder": "^0.0.8",
 		"prettier": "^2.7.1",
-		"sass": "^1.54.3",
-		"prettier-plugin-astro": "^0.3.0"
+		"sass": "^1.54.5",
+		"prettier-plugin-astro": "^0.5.3"
 	},
 	"dependencies": {
-		"astro-sections": "^0.0.5",
-		"date-fns": "^2.29.1",
+		"astro-sections": "^0.0.7",
+		"date-fns": "^2.29.2",
 		"quicklink": "^2.3.0",
 		"rehype-autolink-headings": "^6.1.1",
 		"remark-autolink-headings": "^7.0.1",
